@@ -1,33 +1,43 @@
-name: 'Run rubocop with reviewdog'
-description: '🐶 Run rubocop with reviewdog on pull requests to improve code review experience.'
-author: 'mgrachev (reviewdog)'
+name: "Run rubocop with reviewdog"
+description: "🐶 Run rubocop with reviewdog on pull requests to improve code review experience."
+author: "mgrachev (reviewdog)"
 inputs:
   github_token:
-    description: 'GITHUB_TOKEN.'
+    description: "GITHUB_TOKEN."
     required: true
   rubocop_flags:
-    description: 'rubocop flags. (rubocop <rubocop_flags>)'
-    default: ''
+    description: "rubocop flags. (rubocop <rubocop_flags>)"
+    default: ""
   tool_name:
-    description: 'Tool name to use for reviewdog reporter'
-    default: 'rubocop'
+    description: "Tool name to use for reviewdog reporter"
+    default: "rubocop"
   level:
-    description: 'Report level for reviewdog [info,warning,error]'
-    default: 'error'
+    description: "Report level for reviewdog [info,warning,error]"
+    default: "error"
   reporter:
     description: |
       Reporter of reviewdog command [github-pr-check,github-pr-review].
       Default is github-pr-check.
-    default: 'github-pr-check'
+    default: "github-pr-check"
+  rubocop_version:
+    description: "Rubocop version"
+  rubocop_extensions:
+    description: "Rubocop extensions"
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: "docker"
+  image: "Dockerfile"
   args:
     - ${{ inputs.github_token }}
     - ${{ inputs.rubocop_flags }}
     - ${{ inputs.tool_name }}
     - ${{ inputs.level }}
     - ${{ inputs.reporter }}
+    - ${{ inputs.rubocop_version }}
+    - ${{ inputs.rubocop_rails_version }}
+    - ${{ inputs.rubocop_performance_version }}
+    - ${{ inputs.rubocop_rspec_version }}
+    - ${{ inputs.rubocop_i18n_version }}
+    - ${{ inputs.rubocop_rake_version }}
 branding:
-  icon: 'check-circle'
-  color: 'red'
+  icon: "check-circle"
+  color: "red"
